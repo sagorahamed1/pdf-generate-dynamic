@@ -28,11 +28,12 @@ class _PdfGeneratorPageState extends State<PdfGeneratorPage> {
   final _formKey = GlobalKey<FormState>();
   final _formKeyMedicine = GlobalKey<FormState>();
   final List<Medication> _medications = [
-    Medication(name: "Medicine Name", dosage: "Dosage", frequency: "Frequency", duration: "Duration")
+    Medication(
+        name: "Medicine Name",
+        dosage: "Dosage",
+        frequency: "Frequency",
+        duration: "Duration")
   ];
-
-
-
 
   TextEditingController diagnosisCtrl = TextEditingController();
   TextEditingController medicineNameCtrl = TextEditingController();
@@ -41,12 +42,10 @@ class _PdfGeneratorPageState extends State<PdfGeneratorPage> {
   TextEditingController durationCtrl = TextEditingController();
   TextEditingController instructionsCtrl = TextEditingController();
 
-
   SignatureController signatureController = SignatureController(
     penStrokeWidth: 3,
     penColor: Colors.red,
-      exportBackgroundColor: Colors.yellow,
-
+    exportBackgroundColor: Colors.yellow,
   );
 
   String pathPDF = "";
@@ -79,20 +78,20 @@ class _PdfGeneratorPageState extends State<PdfGeneratorPage> {
               onPressed: () async {
                 await generatePDF();
               },
-              child: Text('Generate PDF'),
+              child: const Text('Generate PDF'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
                 setState(() {
                   pathPDF = '';
                 });
               },
-              child: Text('Remove PDF'),
+              child: const Text('Remove PDF'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             if (pathPDF.isNotEmpty)
-              Container(
+              SizedBox(
                 height: 500, // Adjust height as needed
                 child: PDFView(
                   filePath: pathPDF,
@@ -118,7 +117,7 @@ class _PdfGeneratorPageState extends State<PdfGeneratorPage> {
 
     final headerStyle =
         pw.TextStyle(fontSize: 24, fontWeight: pw.FontWeight.bold);
-    final mediuamStyle = pw.TextStyle(fontSize: 20);
+    const mediuamStyle = pw.TextStyle(fontSize: 20);
 
     pdf.addPage(
       pw.Page(
@@ -157,6 +156,7 @@ class _PdfGeneratorPageState extends State<PdfGeneratorPage> {
               pw.Container(
                   height: 15, width: double.infinity, color: PdfColors.amber),
               pw.SizedBox(height: 8),
+
               ///====================Patient Information============>
               pw.Text('Patient Information', style: headerStyle),
               pw.SizedBox(height: 12),
@@ -180,7 +180,6 @@ class _PdfGeneratorPageState extends State<PdfGeneratorPage> {
                       ])
                     ]),
                   ]),
-
 
               ///===================Phone Number and Age==========>
               pw.Row(
@@ -206,9 +205,6 @@ class _PdfGeneratorPageState extends State<PdfGeneratorPage> {
 
               pw.Container(
                   height: 15, width: double.infinity, color: PdfColors.amber),
-
-
-
 
               pw.SizedBox(height: 12),
 
@@ -236,10 +232,6 @@ class _PdfGeneratorPageState extends State<PdfGeneratorPage> {
                 headerHeight: 40,
               ),
 
-
-
-
-
               ///===================Physician Name and Physician Signature==========>
               pw.Column(children: [
                 pw.SizedBox(height: 20),
@@ -257,7 +249,6 @@ class _PdfGeneratorPageState extends State<PdfGeneratorPage> {
               ]),
 
               pw.SizedBox(height: 12),
-
             ],
           ),
         ),
@@ -492,16 +483,12 @@ class _PdfGeneratorPageState extends State<PdfGeneratorPage> {
           controller: instructionsCtrl,
         ),
 
-
         // Signature(
         //   controller: signatureController,
         //   width: 300,
         //   height: 300,
         //   backgroundColor: Colors.lightBlue,
         // )
-
-
-
       ],
     );
   }
